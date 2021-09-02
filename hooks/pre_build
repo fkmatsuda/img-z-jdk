@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo docker run --privileged --rm tonistiigi/binfmt --install all
+sudo docker run -d --privileged -p 1234:1234 --name buildkit moby/buildkit:latest --addr tcp://0.0.0.0:1234 --oci-worker-platform linux/amd64 --oci-worker-platform linux/arm64 --oci-worker-platform linux/arm64 --oci-worker-platform linux/arm64/v8 --oci-worker-platform linux/arm/v8 --oci-worker-platform linux/arm/v7 --oci-worker-platform linux/arm/v6
+sudo docker cp buildkit:/usr/bin/buildctl /usr/bin/
+mkdir -p ~/.docker/cli-plugins
+wget https://github.com/docker/buildx/releases/download/v0.6.3/buildx-v0.6.3.linux-amd64
+mv buildx-v0.6.3.linux-amd64 ~/.docker/cli-plugins/docker-buildx
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+docker buildx install
+docker buildx create --use --name mybuilder --driver docker-container 
