@@ -4,17 +4,7 @@ manifests:
     platform:
       architecture: amd64
       os: linux
-  - image: fkmatsuda/img-z-jdk11:arm32v6
-    platform:
-      architecture: arm
-      os: linux
-      variant: v6
-  - image: fkmatsuda/img-z-jdk11:arm32v7
-    platform:
-      architecture: arm
-      os: linux
-      variant: v7
-  - image: fkmatsuda/img-z-jdk11:arm64v8
+  - image: fkmatsuda/img-z-jdk11:arm64
     platform:
       architecture: arm64
       os: linux

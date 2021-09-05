@@ -16,11 +16,17 @@
 # COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 # IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+FROM alpine AS builder
 
-FROM --platform=amd64 debian:stable-slim
+# Download QEMU, see https://github.com/docker/hub-feedback/issues/1261
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz
+RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
-ENV ZULU_TAR=zulu11.50.19-ca-jdk11.0.12-linux_x64
-ENV DOWNLOAD_URL=https://cdn.azul.com/zulu/bin/${ZULU_TAR}.tar.gz
+FROM --platform=arm64 debian:stable-slim
+COPY --from=builder qemu-arm-static /usr/bin
+
+ENV ZULU_TAR=zulu11.50.19-ca-jdk11.0.12-linux_aarch64
+ENV DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/${ZULU_TAR}.tar.gz
 ENV MAVEN_TAR=apache-maven-3.8.2
 
 COPY scripts/install.sh ./
