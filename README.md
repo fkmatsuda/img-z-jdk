@@ -1,11 +1,11 @@
-# img-z-jdk11
+# img-z-jdk
 Container image with OpenJDK 11 and some build tools.
 
 ## Name
-Z-JDK11
+Z-JDK
 
 ## Description
-A docker image of the official image node: 16.8.0-buster-slim with Zulu JDK 11.0.12 and Apache Maven 3.8.2
+A docker image of the official image node:bullseye-slim with Zulu JDK and Apache Maven
 
 ## Usage
 You can use this image to compile your Java/Maven projects and use tools and utilities available from npm packages like Snyk CLI
@@ -24,3 +24,6 @@ This container image contains:
 * Maven is releasead under the [APACHE LICENSES](./licenses/apache.md).
 
 Other licenses may be applicable, I believe they are all open source, please excuse me for the lack of reference for all.
+
+## GitHub
+https://github.com/fkmatsuda/img-z-jdk
