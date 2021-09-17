@@ -22,18 +22,10 @@ ARG TARGETPLATFORM
 ENV DOWNLOAD_URL=invalid
 ENV ZULU_TAR=invalid
 RUN case "${TARGETPLATFORM}" in \
-         "linux/amd64")     DOWNLOAD_URL=https://cdn.azul.com/zulu/bin/zulu11.50.19-ca-jdk11.0.12-linux_x64.tar.gz                \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_x64"        ;; \
-         "linux/arm64")     DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/zulu11.50.19-ca-jdk11.0.12-linux_aarch64.tar.gz   \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_aarch64"    ;; \
-         "linux/arm64/v8")  DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/zulu11.50.19-ca-jdk11.0.12-linux_aarch64.tar.gz   \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_aarch64"    ;; \
-         "linux/arm/v8")    DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/zulu11.50.19-ca-jdk11.0.12-linux_aarch64.tar.gz   \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_aarch64"    ;; \
-         "linux/arm/v7")    DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/zulu11.50.19-ca-jdk11.0.12-linux_aarch32hf.tar.gz \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_aarch32hf"  ;; \
-         "linux/arm/v6")    DOWNLOAD_URL=https://cdn.azul.com/zulu-embedded/bin/zulu11.50.19-ca-jdk11.0.12-linux_aarch32sf.tar.gz \
-                            ZULU_TAR="zulu11.50.19-ca-jdk11.0.12-linux_aarch32sf"  ;; \
+         "linux/amd64")     DOWNLOAD_URL=https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-linux_x64.tar.gz               \
+                            ZULU_TAR="zulu17.28.13-ca-jdk17.0.0-linux_x64"        ;; \
+         "linux/arm64")     DOWNLOAD_URL=https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-linux_aarch64.tar.gz           \
+                            ZULU_TAR="zulu17.28.13-ca-jdk17.0.0-linux_aarch64"    ;; \
     esac && \
     apt-get update -qq && apt-get upgrade -qq --autoremove --purge && \
     apt-get install -qq wget git java-common libasound2 libxi6 libxtst6 && \
@@ -41,12 +33,12 @@ RUN case "${TARGETPLATFORM}" in \
     mkdir -p /opt/maven /opt/jdk && \
     wget ${DOWNLOAD_URL} && \
     tar -C /opt/jdk -xzf ./${ZULU_TAR}.tar.gz && \
-    mv /opt/jdk/${ZULU_TAR} /opt/jdk/zulu11 && \
+    mv /opt/jdk/${ZULU_TAR} /opt/jdk/zulu17 && \
     rm ./${ZULU_TAR}.tar.gz && \
     wget https://dlcdn.apache.org/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.tar.gz && \
     tar -C /opt/maven/ -xzf ./apache-maven-3.8.2-bin.tar.gz && \
     rm ./apache-maven-3.8.2-bin.tar.gz
 
 ENV MAVEN_HOME="/opt/maven/apache-maven-3.8.2"
-ENV JAVA_HOME="/opt/jdk/zulu11"
+ENV JAVA_HOME="/opt/jdk/zulu17"
 ENV PATH="$JAVA_HOME/bin:$PATH:$MAVEN_HOME/bin"
