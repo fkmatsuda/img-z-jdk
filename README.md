@@ -1,5 +1,5 @@
 # img-z-jdk
-Container image with OpenJDK 11 and some build tools.
+Container image with OpenJDK and some build tools.
 
 ## Name
 Z-JDK
@@ -14,7 +14,7 @@ You can use this image to compile your Java/Maven projects and use tools and uti
 You can ask me for help by [e-mail](mailto:fabio@fkmatsuda.dev), I will try to help as best I can.
 
 ## Roadmap
-I will try to keep this project up to date, with a tag for each release of OpenJDK 11.
+I will try to keep this project up to date, with a tag for each release of OpenJDK.
 
 ## License
 This container image contains:
