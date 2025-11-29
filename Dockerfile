@@ -17,7 +17,7 @@
 # IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-FROM node:20.18-bookworm-slim
+FROM node:20.19.6-bookworm-slim
 ARG TARGETPLATFORM
 RUN case "${TARGETPLATFORM}" in \
          "linux/amd64")     export DOWNLOAD_URL=https://cdn.azul.com/zulu/bin/zulu21.44.17-ca-jdk21.0.8-linux_x64.tar.gz && \
